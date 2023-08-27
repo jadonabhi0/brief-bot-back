@@ -57,7 +57,9 @@ public class WebTextSummaryServiceImpl implements WebTextSummaryService {
 			// getting the text
 			htmlParagraphText = scrapedHtmlElementsServiceImpl.getHtmlParagraphText(htmlPage, "p");
 		} catch (TextNotFoundException e) {
+			e.printStackTrace();
 			throw new TextNotFoundException();
+			
 		}
 		
 		// returnint the text of webpage
