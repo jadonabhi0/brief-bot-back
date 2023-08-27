@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abhi.briefbot.entity.Url;
 import com.abhi.briefbot.exceptions.ServerTimeOutException;
 import com.abhi.briefbot.exceptions.TextNotFoundException;
 import com.abhi.briefbot.response.ApiResponse;
@@ -85,13 +87,14 @@ public class SummaryController {
 	@see TextSummary
 	 */
 	
-	@GetMapping("/allsummary")
-	public ResponseEntity<SummaryApiResponse> getSummaryByPara(@RequestBody String url) throws Exception{
+	@PostMapping("/allsummary")
+	public ResponseEntity<SummaryApiResponse> getSummaryByPara(@RequestBody Url apiUrl) throws Exception{
+		System.out.println(apiUrl.getUrl());
 		SummaryApiResponse convertTextIntoSummary = null;
 		try {
 			
 			// Reciving the extracted and preprocessed text of the web page.
-			String allSummary = webTextSummaryService.getAllSummary(url);
+			String allSummary = webTextSummaryService.getAllSummary(apiUrl.getUrl());
 			
 			// converting the recived text into final summary.
 			convertTextIntoSummary = textSummary.convertTextIntoSummary(allSummary);
