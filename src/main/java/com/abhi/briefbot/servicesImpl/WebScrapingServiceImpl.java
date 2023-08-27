@@ -62,7 +62,7 @@ public class WebScrapingServiceImpl implements WebScrapingService{
 			// dissabling the css of web page
 			webClient.getOptions().setCssEnabled(false);
 			
-			webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
+//			webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
 			
 			// fetching the HtmlPage
 			htmlpage = webClient.getPage(url);
