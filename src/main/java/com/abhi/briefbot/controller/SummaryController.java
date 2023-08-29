@@ -1,5 +1,7 @@
 package com.abhi.briefbot.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,14 +66,15 @@ import com.abhi.briefbot.summary.TextSummary;
 @RequestMapping(value = "/api/response")
 public class SummaryController {
 	
+	Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	WebTextSummaryService webTextSummaryService;
 	
 	@Autowired
 	TextSummary textSummary;
 	
-	@Autowired
-	DemoSummary demoSummary;
+
 	
 	
 	/**
@@ -89,19 +92,26 @@ public class SummaryController {
 	
 	@PostMapping("/allsummary")
 	public ResponseEntity<SummaryApiResponse> getSummaryByPara(@RequestBody Url apiUrl) throws Exception{
-		System.out.println(apiUrl.getUrl());
+		
+		logger.info("Requested for : {}", apiUrl.getUrl());
+		
 		SummaryApiResponse convertTextIntoSummary = null;
 		try {
 			
 			// Reciving the extracted and preprocessed text of the web page.
 			String allSummary = webTextSummaryService.getAllSummary(apiUrl.getUrl());
 			
+			logger.info("Non-summarized content: {}",allSummary);
+			
 			// converting the recived text into final summary.
 			convertTextIntoSummary = textSummary.convertTextIntoSummary(allSummary);
+			logger.info("Summarized content: {}", convertTextIntoSummary);
 			
 		} catch (ServerTimeOutException e) {
+			logger.error("Error occuring : {}", e.getMessage());
 			throw new ServerTimeOutException();
 		} catch (TextNotFoundException e) {
+			logger.error("Error occuring : {}", e.getMessage());
 			throw new TextNotFoundException();
 		}
 		
@@ -110,12 +120,6 @@ public class SummaryController {
 
 	}
 	
-	
-	@GetMapping("/demo/response")
-	public ApiResponse demo(@RequestBody String url) throws Exception {
-		String allSummary = webTextSummaryService.getAllSummary(url);
-		ApiResponse apiResponse = demoSummary.getSummartDemo(allSummary);
-		return apiResponse;
-	}
+
 
 }

@@ -2,8 +2,12 @@ package com.abhi.briefbot.servicesImpl;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 import com.abhi.briefbot.services.WebScrapingService;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -50,16 +54,13 @@ public class WebScrapingServiceImpl implements WebScrapingService {
 	private WebClient webClient;
 
 	HtmlPage htmlpage;
+	
+	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public HtmlPage getHtmlPage(String url) throws Exception {
 
 		try {
-
-//			webClient.addRequestHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP
-//			// 1.1.
-//			webClient.addRequestHeader("Pragma", "no-cache"); // HTTP 1.0.
-//			webClient.addRequestHeader("Expires", "0"); //
 
 			// dissabling the javaScript of web page
 			webClient.getOptions().setJavaScriptEnabled(false);
@@ -67,19 +68,17 @@ public class WebScrapingServiceImpl implements WebScrapingService {
 			// dissabling the css of web page
 			webClient.getOptions().setCssEnabled(false);
 
-//			webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-//			webClient.getOptions().setThrowExceptionOnScriptError(false);       
-//			webClient.getOptions().setPrintContentOnFailingStatusCode(false);
-
 			// fetching the HtmlPage
 			htmlpage = webClient.getPage(url);
 
-		} catch (FailingHttpStatusCodeException | IOException e) {
-			e.printStackTrace();
-			throw new FailingHttpStatusCodeException("not a valid page for getting summary",null);
+		} catch (FailingHttpStatusCodeException | IOException  e) {
+			
+			throw new FailingHttpStatusCodeException("Oops! It seems there was an issue with your webpage! May be not a valid page for Summarization.",null);
 
 		} 
-
+		
+		logger.info("picked the htmlPage : {}", url);
+		
 		// returning the final htmlpage
 		return htmlpage;
 	}

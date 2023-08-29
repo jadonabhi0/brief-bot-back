@@ -1,5 +1,7 @@
 package com.abhi.briefbot.servicesImpl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +47,9 @@ public class WebTextSummaryServiceImpl implements WebTextSummaryService {
 	
 	@Autowired
 	ScrapedHtmlElementsServiceImpl scrapedHtmlElementsServiceImpl;
-
+	
+	Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Override
 	public String getAllSummary(String url) throws Exception {
 		
@@ -56,8 +60,10 @@ public class WebTextSummaryServiceImpl implements WebTextSummaryService {
 			
 			// getting the text
 			htmlParagraphText = scrapedHtmlElementsServiceImpl.getHtmlParagraphText(htmlPage, "p");
+			
+			logger.info("collected whole raw text : {}", htmlParagraphText);
 		} catch (TextNotFoundException e) {
-			e.printStackTrace();
+			logger.error("Error occuring : {}", e.getMessage());
 			throw new TextNotFoundException();
 			
 		}

@@ -20,6 +20,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Url {
+	
+	
 
 	private String url;
 	

@@ -43,22 +43,25 @@ public class GlobalExceptionHandeling {
 	@ExceptionHandler(TextNotFoundException.class)
 	public ResponseEntity<ExceptionMessage> textNotFoundException(TextNotFoundException ex) {
 		String message = ex.getMessage();
-		ExceptionMessage exceptionMessage = new ExceptionMessage(false, message);
+		String suggesation = "Oops! It seems like there's no text to summarize. Please go-to web-pages contains some text content to generate a summary.";
+		ExceptionMessage exceptionMessage = new ExceptionMessage(false, message, suggesation);
 		return new ResponseEntity<ExceptionMessage>(exceptionMessage, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(ServerTimeOutException.class)
 	public ResponseEntity<ExceptionMessage> serverTimeOutException(ServerTimeOutException ex) {
 		String message = ex.getMessage();
-		ExceptionMessage exceptionMessage = new ExceptionMessage(false, message);
+		String suggesation = "The server took too long to respond. Please check your internet connection and try again.";
+		ExceptionMessage exceptionMessage = new ExceptionMessage(false , message, suggesation);
 		return new ResponseEntity<ExceptionMessage>(exceptionMessage, HttpStatus.REQUEST_TIMEOUT);
 	}
 	
 	@ExceptionHandler(FailingHttpStatusCodeException.class)
 	public ResponseEntity<ExceptionMessage> failingHttpStatusCodeException(FailingHttpStatusCodeException ex){
-		String  str = ex.getMessage();
-		ExceptionMessage exceptionMessage = new ExceptionMessage(false, str);
-		return new ResponseEntity<ExceptionMessage>(exceptionMessage, HttpStatus.OK);
+		String  message = ex.getMessage();
+		String suggesation = "We encountered a problem while processing your request, Please try again with other webpages.";
+		ExceptionMessage exceptionMessage = new ExceptionMessage(false, message, suggesation);
+		return new ResponseEntity<ExceptionMessage>(exceptionMessage, HttpStatus.EXPECTATION_FAILED);
 	}
 
 }

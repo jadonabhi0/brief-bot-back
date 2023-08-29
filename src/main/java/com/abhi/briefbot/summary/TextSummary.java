@@ -3,6 +3,8 @@ package com.abhi.briefbot.summary;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -55,6 +57,8 @@ public class TextSummary {
 	@Autowired
 	RestTemplate restTemplate;
 	
+	Logger logger = LoggerFactory.getLogger(getClass());
+	
 	
 	/**
 	@param text is the raw extracted text from web page.
@@ -66,7 +70,8 @@ public class TextSummary {
 	@see RestTemplate
 	 */
 	public SummaryApiResponse convertTextIntoSummary(String text) throws ServerTimeOutException, TextNotFoundException {
-			
+		
+		logger.info("Summary Conversion Start ");
 		ResponseEntity<SummaryApiResponse> responseEntity = null;
 		try {
 			
@@ -96,11 +101,13 @@ public class TextSummary {
         	
         	
 		} catch (RestClientException e) {
+			logger.error("Error occuring : {}", e.getMessage());
 			throw new ServerTimeOutException();
 		} catch (TextNotFoundException e) {
+			logger.error("Error occuring : {}", e.getMessage());
 			throw new TextNotFoundException();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error occuring : {}", e.getMessage());
 		}
 		
 		return responseEntity.getBody();

@@ -2,6 +2,8 @@ package com.abhi.briefbot.servicesImpl;
 
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,10 +46,14 @@ public class ScrapedHtmlElementsServiceImpl implements ScrapedHtmlElementsServic
 	@Autowired
 	DataCleaning dataCleaning;
 	
+	Logger logger = LoggerFactory.getLogger(getClass());
 
 
 	@Override
 	public String getHtmlParagraphText(HtmlPage htmlPage, String tag) throws TextNotFoundException {
+		
+		logger.info("Started picking text from htmlpage : {}", htmlPage.getBaseURL().toString());
+		
 		// getting the list of all selected tabs
 		DomNodeList<HtmlElement> elementsByTagName = htmlPage.getBody().getElementsByTagName(tag);
 		StringBuilder sb = new StringBuilder();
@@ -65,8 +71,9 @@ public class ScrapedHtmlElementsServiceImpl implements ScrapedHtmlElementsServic
 			
 			if(domElement.mayBeDisplayed())sb.append(text);
 		}
-		// if the total content length is less than 500 claracters
+		// if the total content length is less than 500 characters
 		if(sb.length() < 500) {
+			logger.error("Error occuring : text content is to small");
 			throw new TextNotFoundException();
 		}
 

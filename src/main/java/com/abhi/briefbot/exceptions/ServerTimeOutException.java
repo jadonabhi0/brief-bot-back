@@ -48,7 +48,7 @@ public class ServerTimeOutException extends Exception {
 	public ServerTimeOutException() {
 		
 		// passing the user define message to super class constructor
-		super("server takes too long to respond, kindly check your internet connection or try after sometime");
+		super("Server takes too long to respond");
 	}
 	
 }

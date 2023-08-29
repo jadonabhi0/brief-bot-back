@@ -38,4 +38,6 @@ public class ExceptionMessage {
 	
 	private String message;
 	
+	private String suggesation;
+	
 }
