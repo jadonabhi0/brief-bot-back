@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.abhi.briefbot.entity.Url;
 import com.abhi.briefbot.exceptions.ServerTimeOutException;
 import com.abhi.briefbot.exceptions.TextNotFoundException;
-import com.abhi.briefbot.response.ApiResponse;
 import com.abhi.briefbot.response.SummaryApiResponse;
 import com.abhi.briefbot.services.WebTextSummaryService;
-import com.abhi.briefbot.summary.DemoSummary;
 import com.abhi.briefbot.summary.TextSummary;
 
 
@@ -106,6 +103,7 @@ public class SummaryController {
 			// converting the recived text into final summary.
 			convertTextIntoSummary = textSummary.convertTextIntoSummary(allSummary);
 			logger.info("Summarized content: {}", convertTextIntoSummary);
+			System.out.println(convertTextIntoSummary.toString());
 			
 		} catch (ServerTimeOutException e) {
 			logger.error("Error occuring : {}", e.getMessage());
@@ -116,6 +114,7 @@ public class SummaryController {
 		}
 		
 		// returning the final extracted and summarized text.
+		logger.info("Returned Summarized Data");
 		return new ResponseEntity<SummaryApiResponse>(convertTextIntoSummary, HttpStatus.OK);
 
 	}

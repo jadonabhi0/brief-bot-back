@@ -9,6 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+
+/*
+ * AppProps is the class that contains the properties of the
+ * project, specified properties in this class will never be 
+ * change in the execution life cycle of the project
+ * */
+
 /**
  @author Abhishek jadon
  @Date 22-Aug-2023

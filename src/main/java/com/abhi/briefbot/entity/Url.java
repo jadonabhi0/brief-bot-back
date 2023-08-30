@@ -15,13 +15,13 @@ import lombok.Setter;
  @Year 2023
  */
 
+// Url class is an entity class that contains the url of the web page
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Url {
-	
-	
 
 	private String url;
 	

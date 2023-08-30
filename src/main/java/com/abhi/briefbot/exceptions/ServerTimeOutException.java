@@ -38,11 +38,6 @@ package com.abhi.briefbot.exceptions;
 public class ServerTimeOutException extends Exception {
 
 
-	
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ServerTimeOutException() {

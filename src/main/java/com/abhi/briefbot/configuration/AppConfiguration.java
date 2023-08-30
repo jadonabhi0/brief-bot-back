@@ -10,6 +10,17 @@ import com.abhi.briefbot.summary.TextSummary;
 import com.abhi.briefbot.utils.AppProps;
 import com.gargoylesoftware.htmlunit.WebClient;
 
+/**
+ * 
+ @author Abhishek jadon
+ @Date 20-Aug-2023
+ @Time 6:17:05 pm
+ @Year 2023
+ */
+
+
+// This is the configuration class of my Applicaton, beans has beet declaired in this class
+
 @Configuration
 public class AppConfiguration {
 	

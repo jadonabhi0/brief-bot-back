@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * @see ServerTimeOutException
  * @see ExceptionMessage
  * @see ExceptionHandler
- *
+ * @see ResponseEntity
  */
 
 @RestControllerAdvice

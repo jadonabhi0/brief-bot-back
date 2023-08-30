@@ -72,7 +72,7 @@ public class ScrapedHtmlElementsServiceImpl implements ScrapedHtmlElementsServic
 			if(domElement.mayBeDisplayed())sb.append(text);
 		}
 		// if the total content length is less than 500 characters
-		if(sb.length() < 500) {
+		if(sb.length() < 300) {
 			logger.error("Error occuring : text content is to small");
 			throw new TextNotFoundException();
 		}

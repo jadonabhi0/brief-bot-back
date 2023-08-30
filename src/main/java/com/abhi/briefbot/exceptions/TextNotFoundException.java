@@ -42,10 +42,7 @@ package com.abhi.briefbot.exceptions;
 
 public class TextNotFoundException extends Exception{
 	
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public TextNotFoundException() {

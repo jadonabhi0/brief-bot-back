@@ -40,6 +40,7 @@ public class DataCleaning {
 		
         String cleaned = data.replaceAll("[^\\w\\s@'$]+", "")
                 .replaceAll("\\s+", " ")
+                .replaceAll(":", "")
                 .trim();
 		
      
