@@ -6,13 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 import com.abhi.briefbot.services.WebScrapingService;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -45,6 +42,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @Date 26-Aug-2023
  * @Time 1:00:12 pm
  * @Year 2023
+ * @see WebClient
+ * @see HtmlPage
  */
 
 @Service

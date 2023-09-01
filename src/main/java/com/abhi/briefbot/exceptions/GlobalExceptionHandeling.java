@@ -20,8 +20,6 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * Usage:
  *  - Initialize the GlobalExceptionHandler at the start of the application to
  *    set up global exception handling.
- *  - The exception handling behavior can be customized by implementing the
- *    ExceptionHandler interface and registering it with the GlobalExceptionHandler.
  * 
  * 
  * 
